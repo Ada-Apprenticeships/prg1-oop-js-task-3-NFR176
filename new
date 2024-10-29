@@ -1,15 +1,45 @@
-{
-    "name": "prg1-oop-js",
-    "version": "1.0.0",
-    "description": "Create a minimum viable product (MVP) ToDo App",
-    "main": "oop.js",
-    "scripts": {
-        "test": "jest"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "MIT",
-    "dependencies": {
-        "jest": "^29.7.0"
+class Task {
+    constructor(title, priority, added) {
+      this.title = title;
+      this.priority = priority;
+      this.added = added;
     }
-}
+  }
+  
+  class ToDo {
+    constructor() {
+      this.tasks = [];
+    }
+  
+    add(task) {
+      if (task instanceof Task) {
+        this.tasks.push(task);
+        return this.tasks.length;
+      } else {
+        throw new Error(`Invalid Task instance`);
+      }
+    }
+  
+    list(priority = 0) {
+      return this.tasks
+        .filter(task => priority === 0 || task.priority === priority)
+        .map(task => [task.added, task.title, task.priority]);
+    }
+  
+    remove(title) {
+      const taskIndex = this.tasks.findIndex(task => task.title.toLowerCase() === title.toLowerCase());
+      if (taskIndex !== -1) {
+        this.tasks.splice(taskIndex, 1);
+        return true;
+      }
+      return false;
+    }
+  
+    task(title) {
+      const taskPresent = this.tasks.find(task => task.title.toLowerCase() === title.toLowerCase());
+      if (!taskPresent) {
+        throw new Error(`Task '${title}' Not Found`);
+      }
+      return taskPresent;
+    }
+  }
