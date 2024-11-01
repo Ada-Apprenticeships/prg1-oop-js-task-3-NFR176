@@ -1,12 +1,12 @@
 PRIORITY = { "LOW": 1, "MEDIUM": 3, "HIGH": 5, "URGENT": 7 };
 
 
-function validInteger (value) { // accepts a string or numeric value and return a boolean- showing if the 'value' can be positive
+function validInteger (value) { // accepts a string or numeric value and returns a boolean- showing if the 'value' can be positive
   return Number.isInteger(parseInt(value))  && String(parseInt (value)) === String(value) && Number(value) >=0;
 }  // parseint converts a string to an integer-converts (value) to an integer
 
 
-function validatePriority(priority) { // accept a string or a numerical value- then return[1,3,5,7]
+function validatePriority(priority) { // accept a string or a numerical value- then returns[1,3,5,7]
   const validPriority= Number(priority);
   return[1, 3, 5, 7].includes(validPriority) ? validPriority : PRIORITY["LOW"]
 }//if value is invalid- print 'LOW'
@@ -22,11 +22,11 @@ function todaysDate () {
 }
 
 class Task  {
-  #added;
+  #added;//hash used for private fiels within classes//
   #title;
   #priority;
   
-  constructor(title, priority) {
+  constructor(title, priority) { 
     this.#added= todaysDate();
     this.#title=title;
     this.#priority=validatePriority(priority);
@@ -66,7 +66,7 @@ set priority(priority) {
   remove(title){
     const taskIndex = this.tasks.findIndex(task => task.title.toLowerCase() === title.toLowerCase());
     if (taskIndex !== -1) {
-      this.tasks.splice(taskIndex, 1);
+      this.tasks.splice(taskIndex, 1);// used to remove specific tasks from a list of tasks//
       return true;
     }
     return false;
@@ -75,7 +75,7 @@ set priority(priority) {
   list(priority = 0) {
     return this.tasks
     .filter(task => priority === 0 || task.priority === priority)
-    .map(task =>[task.added, task.title,task.priority]);
+    .map(task =>[task.added, task.title,task.priority]); //will take the first element from the listed task. and make into an array//
  }
  task(title) {
     const task = this.tasks.find(task => task.title.toLowerCase() === title.toLowerCase());
