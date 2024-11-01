@@ -22,31 +22,31 @@ function todaysDate () {
 }
 
 class Task  {
-  _added;
-  _title;
-  _priority;
+  #added;
+  #title;
+  #priority;
   
   constructor(title, priority) {
-    this._added= todaysDate();
-    this._title=title;
-    this._priority=validatePriority(priority);
+    this.#added= todaysDate();
+    this.#title=title;
+    this.#priority=validatePriority(priority);
   
   }
 
   get added() {
-  return this._added;
+  return this.#added;
 
 }
 get title() {
-  return this._title
+  return this.#title
 } 
 
 get priority() {
-  return this._priority;  
+  return this.#priority;  
 }
 
 set priority(priority) {
- this._priority = validatePriority(priority);
+ this.#priority = validatePriority(priority);
 
 }
 }
